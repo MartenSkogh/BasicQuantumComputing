@@ -40,41 +40,50 @@ CZ = np.matrix([[1, 0, 0, 0],
 if __name__ == "__main__":
     print("=== Question 1: ===")
 
-    in_state = np.matrix([1,1,0,0]).T
+    in_state = 1/sqrt(2) * np.matrix([1,1,0,0]).T
 
-    U_12 = kron(I, rx(-PI/2)) * CX * kron(I, rz(PI/2)) * CX
-    out_state = U_12 * in_state
+    U = kron(rx(-PI/2), I) * CX * kron(I, rz(-PI/2)) * CX
+    out_state = U * in_state
 
     print(in_state)
-    print(U_12)
+    print(U)
     print(out_state) 
 
 
     print("=== Question 2: ===")
-    in_state = np.matrix([0,0,1,1]).T
-    out_state = U_12 * in_state
+    in_state = 1/sqrt(2) * np.matrix([0,0,1,1]).T
+    out_state = U * in_state
 
     print(in_state)
-    print(U_12)
+    print(U)
     print(out_state) 
 
     print("=== Question 3: ===")
-    in_state = np.matrix([1,1,1,1]).T
-    out_state = U_12 * in_state
+    in_state = 1/sqrt(2) * np.matrix([1,1,1,1]).T
+    out_state = U * in_state
 
     print(in_state)
-    print(U_12)
+    print(U)
     print(out_state) 
 
     print("=== Question 4: ===")
     # This is not working :(
-    in_state = np.matrix([1,1,1,1,1,1,1,1]).T
+    in_state = 1/sqrt(8) * np.matrix([1,1,1,1,1,1,1,1]).T
 
-    U_12 = kron(I, kron(I, rx(-PI/2)) * CX * kron(I, rz(PI/2)) * CX)
-    U_23 = kron(kron(I, rx(-PI/2)) * CX * kron(I, rz(PI/2)) * CX, I)
+    U_12 = kron(I, U)
+    U_23 = kron(U, I)
 
     out_state = U_23 * U_12 * in_state
 
     print(in_state)
     print(U_23 * U_12)
     print(out_state) 
+#
+    #print(CX * kron(I, Z) * CX)
+    #print(kron(Z, I) * kron(I, Z))
+    #print(kron(Z, Z))
+#
+    #print(kron(Z, I))
+    #print(kron(I, Z))
+#
+    #print(CX * np.matrix([1,1,0,0]).T)
